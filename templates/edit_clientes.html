@@ -1,0 +1,50 @@
+{% extends 'layout.html' %} {% block body %}
+
+<div class="card card-body mb-4 col-md-5 offset-md-4">
+    <form action="/updatedos/{{ cliente.0 }}" method="POST">
+
+        <div class="form-group mb-2">
+            <input type="text" name="Nombre cliente" placeholder="Nombre cliente" value="{{cliente.2}}" class="form-control">
+        </div>
+
+        <div class="form-group mb-2">
+            <input type="text" name="Teléfono" placeholder="Teléfono" value="{{cliente.3}}" class="form-control">
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="Descuento Empleado" value="true" id="defaultCheck1" />
+            <label class="form-check-label" for="defaultCheck1">
+              Descuento Empleado
+            </label>
+        </div>
+
+        <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" name="Descuento Vip" value="true" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+              Descuento VIP
+            </label>
+        </div>
+
+        <div class="form-group mb-2">
+            <input type="text" name="DNI del Cliente" placeholder="Pega el enlace de la foto del DNI del cliente" value="{{cliente.6}}" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="Más Info" placeholder="Más Info" value="{{cliente.7}}" class="form-control">
+        </div>
+
+
+        <div class="form-group btn btn-block d-grid gap-2">
+            <button type="submit" class="btn btn-warning">
+                Aceptar
+            </button>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+{% endblock %}

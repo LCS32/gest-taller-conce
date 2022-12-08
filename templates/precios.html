@@ -1,0 +1,107 @@
+{% extends 'layout.html' %} {% block body %}
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for message in messages %}
+        <div class="alert alert-{{message[0]}} alert-dismissible fade show" role="alert">
+            {{ message[1] }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            </button>
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
+
+        <div class="card card-body mb-4">
+            <form action="/add_car" method="POST">
+                <div class="form-group mb-2">
+                    <input type="text" name="Nombre vehículo" placeholder="Nombre vehículo" class="form-control">
+                </div>
+                <div class="form-group mb-2">
+                    <input type="text" name="Precio de concesionario" placeholder="Precio de concesionario" class="form-control">
+                </div>
+                <div class="form-group btn btn-block d-grid gap-2">
+                    <button type="submit" class="btn btn-warning">
+                        Aceptar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <script src="static\js\busqueda2.js"></script>
+        <script src="static\js\busqueda3.js"></script>
+        <!------ Include the above in your HEAD tag ---------->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mx-auto mb-4">
+                    <input type="search" id="search" value="" class="form-control" placeholder="Introduce la matrícula del vehículo">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table" id="table">
+                        <thead>
+                            <tr>
+
+                                <th>
+                                    <font color="1EC8FF">Nombre del vehículo</th>
+                                </font>
+                                <th>
+                                    <font color="1EC8FF">Precio Nuevo</th>
+                                </font>
+                                <th>
+                                    <font color="1EC8FF">Compramos</th>
+                                </font>
+                                <th>
+                                    <font color="1EC8FF">Vendemos</th>
+                                </font>
+                                <th>
+                                    <font color="1EC8FF">Pintura</th>
+                                </font>
+                                <th>
+                                    <font color="1EC8FF">Estética</th>
+                                </font>
+                                <th>
+                                    <font color="1EC8FF">Motor</th>
+                                </font>
+                                <th>
+                                    <font color="1EC8FF">Full Tunning</th>
+                                </font>
+                                <th>
+                                    <font color="1EC8FF">Contratos</th>
+                                </font>
+                                <th>
+                                    <font color="1EC8FF">Opciones</th>
+                                </font>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for vehiculo in vehiculos %}
+                            <tr>
+                                <td>{{ vehiculo.1 }}</td>
+                                <td>{{ vehiculo.2 | currencyFormat}}</td>
+                                <td>{{ vehiculo.3 | currencyFormat}}</td>
+                                <td>{{ vehiculo.4 | currencyFormat}}</td>
+                                <td>{{ vehiculo.5 | currencyFormat}}</td>
+                                <td>{{ vehiculo.6 | currencyFormat}}</td>
+                                <td>{{ vehiculo.7 | currencyFormat}}</td>
+                                <td>{{ vehiculo.8 | currencyFormat}}</td>
+                                <td>{{ vehiculo.9 | currencyFormat}}</td>
+                                <td>
+                                    <a href="/edit/{{vehiculo.0}}" class="btn btn-secondary btn-sm">EDITAR</a>
+                                    <a href="/delete/{{vehiculo.0}}" class="btn btn-danger btn-delete btn-sm">BORRAR</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <script src="static\js\busqueda.js"></script>
+
+
+
+
+
+            {% endblock %}

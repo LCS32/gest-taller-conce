@@ -1,0 +1,9 @@
+- Que funcione descuento de empleado y descuento vip
+- publicar web para acceder desde fuera
+
+
+aprender ORM
+flask dashboard
+
+
+arreglar tamañp barra iniciar sesion

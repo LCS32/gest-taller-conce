@@ -1,0 +1,178 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+
+<div class="card card-body mb-4 col-md-9 mx-auto">
+    <div class="form-row text-center ">
+        <div class="col-12 mb-2">
+            <a href="/mov_compraventa" class="btn btn-primary">Movimientos Compraventa</a>
+        </div>
+        <div class="col-12 mb-2">
+            <a href="/coches_comprados" class="btn btn-info">Coches Comprados</a>
+        
+            <a href="/coches_vendidos" class="btn btn-info">Coches Vendidos</a>
+     
+            <a href="/coches_transferidos" class="btn btn-info">Coches Transferidos</a>
+        </div>
+    </div>
+    <div class="card card-body mb-2 col-md-6 mx-auto bg-primary">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 ">
+                <table class="table" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th scope="col"><font color="1EC8FF">TOTAL COMPRAS</font></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% for compra in compras %}
+                            <td>{{ compra.0 | currencyFormat}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+                <table class="table" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th scope="col"><font color="1EC8FF">TOTAL VENTAS</font></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% for venta in ventas %}
+                            <td>{{ venta.0 | currencyFormat}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th scope="col"><font color="1EC8FF">TOTAL GESTORIA</font></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% for transferencia in transferencias %}
+                            <td>{{ transferencia.0 | currencyFormat}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th scope="col"><font color="1EC8FF">TOTAL MOVIMIENTOS</font></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% for movimiento in movimientos %}
+                            <td>{{ movimiento.0 | currencyFormat}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th scope="col"><font color="1EC8FF">TOTAL</font></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{(movimiento.0 + transferencia.0 + venta.0 - compra.0) | currencyFormat}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card card-body mb-4 col-md-9 mx-auto">
+    <div class="form-row text-center ">
+        <div class="col-12 mb-2">
+            <a href="/mov_tallermecanico" class="btn btn-warning">Movimientos Taller Mecanico</a>
+        </div>
+    </div>
+
+    <div class="card card-body mb-2 col-md-6 mx-auto bg-warning">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 ">
+
+                <table class="table" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th scope="col"><font color="1EC8FF">TOTAL TUNEOS</font></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% for tuneo in tuneos %}
+                            <td>{{ tuneo.0 | currencyFormat}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th scope="col"><font color="1EC8FF">TOTAL SERVICIOS</font></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% for servicio in servicios %}
+                            <td>{{ servicio.0 | currencyFormat}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th scope="col"><font color="1EC8FF">TOTAL MOVIMIENTOS</font></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% for movimientodos in movimientosdos %}
+                            <td>{{ movimientodos.0 | currencyFormat}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th scope="col"><font color="1EC8FF">TOTAL</font></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{(tuneo.0 + movimientodos.0 + servicio.0) | currencyFormat}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endfor %}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+
+
+{% endblock %}

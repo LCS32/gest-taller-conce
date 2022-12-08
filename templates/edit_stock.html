@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<div class="col-md-5 offset-md-4">
+    <div class="card card-body ">
+        <form action="/updatetres/{{ stock.0 }}" method="POST">
+
+            <div class="mx-auto" style= "text-align:center">
+                <label for="exampleDataList" name="Modelo vehículo" class="form-label offset-md-4 mx-auto">Modelo vehículo</label>
+            </div>
+                <input class="form-control mx-auto mb-4" name="Modelo vehículo" style="width: 360px" list="datalistOptions" id="exampleDataList" placeholder="Escribe para buscar...">
+            
+                <datalist id="datalistOptions">
+                    {% for vehiculo in vehiculos %}
+                    <option value="{{ vehiculo.1 }}"></option>
+                    {% endfor %}
+                </datalist>
+
+            <div class="mx-auto" style= "text-align:center">
+                <label for="exampleDataList" name="Matricula" class="form-label offset-md-4 mx-auto">Matricula</label>
+            </div>
+            <div class="form-group col-md-4 mx-auto mb-4" style="width: 360px">
+                <input type="text" name = "Matricula" placeholder="Matricula" value="{{stock.2}}" class="form-control">
+            </div>
+
+            <div class="form-group btn btn-block d-grid gap-2">
+                <button type = "submit" class="btn btn-warning btn-block">
+                    Aceptar
+                </button>
+            </div>
+                
+        </form>
+    </div>
+</div>
+ 
+
+
+
+
+
+{% endblock %}

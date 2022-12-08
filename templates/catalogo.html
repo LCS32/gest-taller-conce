@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{message[0]}} alert-dismissible fade show" role="alert">
+        {{ message[1] }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+    </div>
+
+    
+</div>
+
+<script src="static\js\busqueda2.js"></script>
+<script src="static\js\busqueda3.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 mx-auto mb-4">
+            <input type="search" id="search" value="" class="form-control" placeholder="Introduce la matrícula o el modelo del vehículo">
+        </div>
+    </div>
+    <div class="card card-body mb-2 col-md-12 mx-auto">
+        <div class="row justify-content-center mb-2">
+            <div class="col-lg-9 ">
+                <table class="table" id="table" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th scope="col"><font color="1EC8FF"><h1>COCHES DISPONIBLES FULL TUNNING</h1></font></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for stock in stocks %}
+                        
+                        <tr>
+                            <td align="center">
+                            <FONT SIZE=5 color ="#FFFF00">{{ stock.6 }}</FONT> <br>
+                            <FONT SIZE=4> {{ stock.2 }}</FONT>  <br>
+                            <FONT SIZE=4> {{ stock.9 | currencyFormat }}</FONT> <br>
+                          
+                            <a href=" {{ stock.4 }} "><img src= {{ stock.4 }} WIDTH=900 HEIGHT=600 BORDER=1 VSPACE=3 HSPACE=3></a> <br>
+                            </td>
+                        </tr>
+                        
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>   
+    </div>
+</div>
+<script src="static\js\busqueda.js"></script>
+{% endblock %}

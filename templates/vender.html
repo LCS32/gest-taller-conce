@@ -1,0 +1,111 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{message[0]}} alert-dismissible fade show" role="alert">
+        {{ message[1] }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+    </div>
+
+    
+
+    <div class="col-md-5 offset-md-4">
+        <div class="card card-body">
+            <form action="/add_venta/{{ stock.0 }}" method="POST">
+                
+                <div class="form-group col-md-4 mx-auto mb-4" style="width: 360px">
+                    <input type="text" name = "Modelo" placeholder="Modelo" value="{{stock.6}}" class="form-control">
+                </div>
+                    
+                <div class="form-group col-md-4 mx-auto mb-4" style="width: 360px">
+                    <input type="text" name = "Matricula" placeholder="Matricula" value="{{stock.2}}" class="form-control">
+                </div>
+
+                <div class="mx-auto" style= "text-align:center">
+                    <label for="exampleDataList" name="Nombre Vendedor" class="form-label offset-md-4 mx-auto">Nombre Vendedor</label>
+                </div>
+                    <input class="form-control mx-auto mb-4" name="Nombre Vendedor" style="width: 360px" list="datalistOptions" id="exampleDataList" placeholder="Escribe para buscar...">
+                
+                
+                    <datalist id="datalistOptions">
+                        {% for trabajador in trabajadores %}
+                        <option value="{{ trabajador.3 }}"></option>
+                        {% endfor %}
+                    </datalist>
+    
+                    <div class="mx-auto" style= "text-align:center">
+                        <label for="exampleDataList2" name="Nombre Cliente" class="form-label offset-md-4 mx-auto">Nombre Cliente</label>
+                    </div>
+                        <input class="form-control mx-auto mb-4" name="Nombre Cliente" style="width: 360px" list="datalistOptions2" id="exampleDataList2" placeholder="Escribe para buscar...">
+                    
+                    <datalist id="datalistOptions2">
+                        {% for cliente in clientes %}
+                        <option value="{{ cliente.2 }}"></option>
+                        {% endfor %}
+                    </datalist>
+
+                <div class="mx-auto" style= "text-align:center">
+                    <label for="exampleDataList" name="Precio de venta sugerido" class="form-label offset-md-4 mx-auto">Precio de venta sugerido</label>
+                </div>
+
+                <fieldset disabled>
+                    <div class="form-group col-md-4 mx-auto mb-4" style="width: 360px">
+                        <input type="text" name = "Precio de venta sugerido" placeholder="Precio de venta sugerido" value="{{stock.9 | currencyFormat}}" class="form-control">
+                    </div>
+                </fieldset>
+
+                <div class="mx-auto" style= "text-align:center">
+                    <label for="exampleDataList" name="Precio de venta VIP sugerido" class="form-label offset-md-4 mx-auto">Precio de venta VIP sugerido</label>
+                </div>
+            
+                <fieldset disabled>
+                <div class="form-group col-md-4 mx-auto mb-4" style="width: 360px">
+                    <input type="text" name = "Precio de venta VIP sugerido" placeholder="Precio de venta VIP sugerido" value="{{ (stock.9 * 0.9) | currencyFormat }}" class="form-control">
+                </div>
+                </fieldset>
+                
+                <div class="mx-auto" style= "text-align:center">
+                    <label for="exampleDataList" name="Precio de venta final" class="form-label offset-md-4 mx-auto">Precio de venta final</label>
+                </div>
+
+                <div class="form-group col-md-4 mx-auto mb-4" style="width: 360px">
+                    <input type="text" name = "Precio de venta final" placeholder="Precio de venta final" value="" class="form-control">
+                </div>
+
+                <div class="form-check col-md-3 mx-auto mb-4" style="width: 360px">
+                    <input class="form-check-input" type="checkbox" name="Disponible para venta" value="False" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                    Disponible para venta
+                    </label>
+                </div>
+
+                <div class="form-group col-md-4 mx-auto mb-4" style="width: 360px">
+                    <input type="text" name = "Insertar foto" placeholder="Insertar enlace foto" value="{{stock.4}}" class="form-control">
+                </div>
+
+                <div class="form-group btn btn-block d-grid gap-2">
+                    <button type = "submit" class="btn btn-warning btn-block">
+                        Aceptar
+                    </button>
+                </div>
+                    
+            </form>
+        </div>
+    </div>
+ 
+
+
+
+
+
+{% endblock %}

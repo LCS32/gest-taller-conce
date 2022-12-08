@@ -1,0 +1,10 @@
+    
+    
+    if len(datatres) >0 and datatres[0][3] == False:
+        cur.execute("UPDATE stock_coches SET en_venta=true WHERE lower(matricula) = lower('" + matricula + "')")
+        connection.commit()
+        flash("El vehículo ha sido modificado a disponible correctamente.", category='success')
+        return redirect(url_for('stock'))
+    if len(datatres) >0 and datatres[0][3] == True:
+        flash("Esta matrícula ya existe en la base de datos.", category='danger')
+        return redirect(url_for('stock'))

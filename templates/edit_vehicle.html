@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<div class="card card-body mb-4 col-md-5 offset-md-4">
+    <div class="card-body">
+        <form action="/update/{{ vehicle.0 }}" method="POST">
+
+            <div class="mx-auto" style="text-align:center">
+                <label for="exampleDataList" name="Modelo coche" class="form-label offset-md-4 mx-auto">Modelo coche</label>
+            </div>
+
+            <div class="form-group mb-2">
+                <input type="text" name = "Nombre vehículo" placeholder="Nombre vehículo" value="{{vehicle.1}}" class="form-control">
+            </div>
+
+            <div class="mx-auto" style="text-align:center">
+                <label for="exampleDataList" name="Precio de concesionario" class="form-label offset-md-4 mx-auto">Precio de concesionario</label>
+            </div>
+            
+            <div class="form-group mb-2">
+                <input type="text" name = "Precio de concesionario" placeholder="Precio de concesionario" value="{{vehicle.2}}" class="form-control">
+            </div>
+
+            <div class="form-group btn btn-block d-grid gap-2">
+                <button type = "submit" class="btn btn-success btn-block">
+                    Aceptar
+                </button>
+            </div>
+            
+        </form>
+    </div>
+</div>
+ 
+
+
+
+
+
+{% endblock %}

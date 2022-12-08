@@ -1,0 +1,137 @@
+{% extends 'layout.html' %} {% block body %}
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
+
+<div class="row">
+    <div class="col-md-5 offset-md-4">
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for message in messages %}
+        <div class="alert alert-{{message[0]}} alert-dismissible fade show" role="alert">
+            {{ message[1] }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            </button>
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
+
+    </div>
+
+
+
+    <div class="col-md-5 offset-md-4">
+        <div class="card card-body">
+            <form action="/add_serviciosmec/" method="POST">                
+
+                <div class="mx-auto" style="text-align:center">
+                    <label for="exampleDataList" name="Nombre Mecanico" class="form-label offset-md-4 mx-auto">Nombre Mecanico</label>
+                </div>
+                <input class="form-control mx-auto mb-2" name="Nombre Mecanico" style="width: 360px" list="datalistOptions" id="exampleDataList" placeholder="Escribe para buscar...">
+
+                <datalist id="datalistOptions">
+                    {% for mecanico in mecanicos %}
+                    <option value="{{ mecanico.3 }}"></option>
+                    {% endfor %}
+                </datalist>
+
+                <div class="mx-auto" style= "text-align:center">
+                    <label for="exampleDataList2" name="Nombre Cliente" class="form-label offset-md-4 mx-auto">Nombre Cliente</label>
+                </div>
+                    <input class="form-control mx-auto mb-4" name="Nombre Cliente" style="width: 360px" list="datalistOptions2" id="exampleDataList2" placeholder="Escribe para buscar...">
+                
+                <datalist id="datalistOptions2">
+                    {% for cliente in clientes %}
+                    <option value="{{ cliente.2 }}"></option>
+                    {% endfor %}
+                </datalist>
+
+                <div class="mx-auto" style= "text-align:center">
+                    <label for="exampleDataList3" name="Tipo de Servicio" class="form-label offset-md-4 mx-auto">Tipo de Servicio</label>
+                </div>
+                    <input class="form-control mx-auto mb-4" name="Tipo de Servicio" style="width: 360px" list="datalistOptions3" id="exampleDataList3" placeholder="Escribe para buscar...">
+                
+                <datalist id="datalistOptions3">
+                    {% for servicio in servicios %}
+                    <option value="{{ servicio.1 }}"></option>
+                    {% endfor %}
+                </datalist>
+
+                <div class="mx-auto mb-2" style="text-align:center">
+                    <label for="exampleDataList" name="Precio del servicio" class="form-label offset-md-4 mx-auto">CALCULA LA FACTURA</label>
+                </div>
+
+                <div class="form-check col-md-3 mx-auto mb-2" style="width: 360px">
+                    <input class="form-check-input" type="checkbox" name="product" value="500" onclick="totalIt()" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                    Reparación en taller
+                    </label>
+                </div>
+                
+                <div class="form-check col-md-3 mx-auto mb-2" style="width: 360px">
+                    <input class="form-check-input" type="checkbox" name="product" value="2000" onclick="totalIt()" id="defaultCheck2">
+                    <label class="form-check-label" for="defaultCheck1">
+                    Reparación en ciudad
+                    </label>
+                </div>
+
+                <div class="form-check col-md-3 mx-auto mb-2" style="width: 360px">
+                    <input class="form-check-input" type="checkbox" name="product" value="3000" onclick="totalIt()" id="defaultCheck2">
+                    <label class="form-check-label" for="defaultCheck1">
+                    Reparación fuera de ciudad
+                    </label>
+                </div>
+
+                <div class="form-check col-md-3 mx-auto mb-2" style="width: 360px">
+                    <input class="form-check-input" type="checkbox" name="product" value="600" onclick="totalIt()" id="defaultCheck3">
+                    <label class="form-check-label" for="defaultCheck1">
+                    Kit de reparación
+                    </label>
+                </div>
+
+                <div class="form-check col-md-3 mx-auto mb-3" style="width: 360px">
+                    <input class="form-check-input" type="checkbox" name="product" value="300" onclick="totalIt()" id="defaultCheck4">
+                    <label class="form-check-label" for="defaultCheck1">
+                    Soplete
+                    </label>
+                </div>
+
+                <div class="mx-auto" style="text-align:center">
+                    <label for="exampleDataList" name="Cantidad" class="form-label offset-md-4 mx-auto">Cantidad</label>
+                </div>
+
+                <div class="form-group col-md-4 mx-auto mb-2" style="width: 360px">
+                    <input type="text" oninput="calculate()" name="Cantidad" placeholder="Cantidad" id="box1" value=" " class="form-control">
+                </div>
+
+                <div class="mx-auto" style="text-align:center">
+                    <label for="exampleDataList" name="Precio de servicio final" class="form-label offset-md-4 mx-auto">Precio unidad</label>
+                </div>
+
+                <div class="form-group col-md-4 mx-auto mb-2" style="width: 360px">
+                    <input type="text" readonly="readonly" oninput="calculate()" name="total" placeholder="" id="box2" value="" class="form-control">
+                </div>
+
+                <div class="mx-auto" style="text-align:center">
+                    <label for="exampleDataList" name="Precio a cobrar" class="form-label offset-md-4 mx-auto">Precio a cobrar</label>
+                </div>
+
+                <div class="form-group col-md-4 mx-auto mb-2" style="width: 360px">
+                    <input type="text" name="Precio a cobrar" readonly="readonly" id="result" placeholder=""  value="" class="form-control">
+                </div>
+
+
+                <div class="form-group btn btn-block d-grid gap-2">
+                    <button type="submit" class="btn btn-warning btn-block">
+                        Aceptar
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+{% endblock %}
+
+
+
